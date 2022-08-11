@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router'
-import Content from './components/content'
+import Content from './components/Content'
 import topics from './data/topics'
 
 const AppRoutes = () => (
