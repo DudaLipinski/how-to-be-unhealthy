@@ -1,5 +1,8 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
+import { useLocation } from 'react-router';
 import styled from "styled-components";
+import topics from '../data/topics';
 import img from "../images/exercise.png";
 
 const ContainerContent = styled.div`
@@ -24,19 +27,23 @@ const ContentItem = styled.div`
   }
 `;
 
-const Content = ({ topics }) => {
+const Content = () => {
+  const location = useLocation();
+  const topic = location.pathname.slice(1);
+
+  const currentTopic = topics.find(({ link }) => topic === link)
+
+  const { title, link, text } = currentTopic;
+
   return (
     <>
       <section>
         <ContainerContent>
-          <ContentItem>
-            {topics.map(({ title, ilustration, text }) => (
-              <div key={title}>
-                <img className="img" src={ilustration} />
-                <img className="img" src={img} />
-                <p>{text}</p>
-              </div>
-            ))}
+          <ContentItem id="topics">
+            <div key={title} className={link}>
+              <img className="img" src={img} />
+              <p>{text}</p>
+            </div>
           </ContentItem>
         </ContainerContent>
       </section>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 const ContainerHeader = styled.div`
@@ -56,20 +57,21 @@ const ItemLink = styled.li`
 `;
 
 const Header = ({ links }) => {
+
+  let linkItem = links.map(({ title, link }) => (
+    <ItemLink key={title}>
+      <Link to={link}>{title}</Link>
+    </ItemLink>
+  ));
+
   return (
     <>
       <ContainerHeader>
         <FirstTitle>a guide on how not to have a</FirstTitle>
         <SecondTitle>Healthy Lifestyle</SecondTitle>
       </ContainerHeader>
-      <ContainerNav>
-        <ListLink>
-          {links.map(({ title }) => (
-            <ItemLink key={title} className="inactive">
-              {title}
-            </ItemLink>
-          ))}
-        </ListLink>
+      <ContainerNav id="menu">
+        <ListLink>{linkItem}</ListLink>
       </ContainerNav>
     </>
   );
